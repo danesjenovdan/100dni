@@ -1,0 +1,92 @@
+body {
+  font-family: 'Barlow', sans-serif;
+}
+
+::selection {
+  background-color: #efcddc;
+}
+
+.header-bg {
+  background-color: #aaf0f0;
+}
+
+.header-image {
+  background-image: url("https://placekitten.com/1600/900");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.header-title-container {
+  transform: translateY(-3rem);
+  background-color: #efcddc;
+  color: #7147dd;
+
+  font-size: 3rem;
+  font-weight: 700;
+  padding: 2rem 3rem 1.5rem;
+  line-height: 1.2;
+  margin-left: 7rem;
+}
+
+.header-title-container::before {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: -99999px;
+  bottom: 0;
+  background-color: #efcddc;
+  z-index: -1;
+}
+
+@media (min-width: 768px) {
+  .aside-col {
+    padding-right: 2rem;
+  }
+
+  .main-col {
+    border-left: 2px solid #efcddc;
+    padding-left: 2rem;
+  }
+}
+
+.letter-container p {
+  font-family: 'Source Serif Pro', serif;
+  font-size: 1.25rem;
+}
+
+.letter-container p .aside {
+  background-color: #efcddc;
+  box-shadow: 0 -2px 0 2px #efcddc;
+  cursor: pointer;
+  transition: all .15s ease-in-out;
+}
+
+.letter-container p .aside:hover:not(.active) {
+  background-color: #efcddc;
+  box-shadow: 0 -2px 0 4px #efcddc;
+}
+
+.letter-container p .aside.active {
+  background-color: #7147dd;
+  box-shadow: 0 -2px 0 2px #7147dd;
+  color: #fff;
+  cursor: default;
+}
+
+.side-text {
+  background-color: #f6f6f6;
+  padding: 1.25rem;
+}
+
+.side-text p:last-child {
+  margin-bottom: 0;
+}
+
+.side-text h6 {
+  color: #7147dd;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
