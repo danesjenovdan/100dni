@@ -37,7 +37,7 @@ $(function onReady() {
       $sideText.append($('<p>').html(popup.content));
 
       var top = $this.offset().top - $letter.offset().top;
-      var offset = 100; // $sideText.height() / 2;
+      var offset = 50; // $sideText.height() / 2;
       $sideText.css('margin-top', Math.max(0, top - offset));
 
       $sideTextContainer.fadeIn('fast');
