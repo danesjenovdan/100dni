@@ -1,9 +1,10 @@
+/* eslint-disable */
 $(function onReady() {
   var popups = null;
   $.getJSON('popups.json', function onSuccess(data) {
     popups = data;
     if (autoOpenPopup) {
-      openPopup({ hash: autoOpenPopup });
+      openPopup({ link: autoOpenPopup });
       autoOpenPopup = '';
     }
   });
@@ -13,12 +14,14 @@ $(function onReady() {
   var $closeButton = $('.close-button');
   var $letter = $('.letter-container');
 
-  var autoOpenPopup = window.location.hash.slice(1).toLowerCase();
+  var hrefParts = window.location.href.split('?')[0].split('/');
+  var autoOpenPopup = hrefParts[hrefParts.length - 1].toLowerCase();
 
-  function changeHash(newHash) {
-    var scr = $(window).scrollTop();
-    window.location.hash = newHash;
-    $('html,body').scrollTop(scr);
+  function changeLink(link) {
+    if (window.history && window.history.pushState) {
+      var url = hrefParts.slice(0, -1).concat([link]).join('/');
+      window.history.pushState({}, '', url);
+    }
   }
 
   function closePopup() {
@@ -28,14 +31,14 @@ $(function onReady() {
     $('body').css('overflow', '');
     $sideTextContainer.css('overflow', '');
 
-    changeHash('');
+    changeLink('');
   }
 
   function openPopup(options) {
     var $this = options.el;
-    var hash = options.hash;
+    var link = options.link;
 
-    if (!$this && !hash) {
+    if (!$this && !link) {
       return;
     }
 
@@ -45,10 +48,10 @@ $(function onReady() {
     if ($this) {
       text = $this.text().trim();
       popup = popups[text];
-    } else if (!$this && hash) {
+    } else if (!$this && link) {
       for (prop in popups) {
         if (popups.hasOwnProperty(prop)) {
-          if (popups[prop].hash === hash) {
+          if (popups[prop].link === link) {
             popup = popups[prop];
             text = prop;
             $letter.find('.aside').filter(function(index) {
@@ -84,7 +87,7 @@ $(function onReady() {
       $sideTextContainer.css('overflow', 'scroll');
     }
 
-    changeHash(popup.hash || '');
+    changeLink(popup.link || '');
   }
 
   $letter.on('click', '.aside', function onClick(event) {
