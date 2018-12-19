@@ -111,4 +111,8 @@ $(function onReady() {
       closePopup();
     });
   });
+
+  $('#select-ministry').on('change', function onChange() {
+    console.log('this', this);
+  });
 });

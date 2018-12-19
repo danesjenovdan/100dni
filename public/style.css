@@ -193,6 +193,7 @@ ul.minus li::before {
 .smaller-title {
   transform: none;
   font-size: 2rem;
+  margin-top: 2rem;
 }
 
 .dropdown-col {
