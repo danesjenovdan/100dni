@@ -18,7 +18,7 @@ body {
 }
 
 .header-image {
-  background-image: url("https://placekitten.com/1600/900");
+  background-image: url('img/100dni.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -28,7 +28,7 @@ body {
   transform: translateY(-3rem);
   background-color: #efcddc;
   color: #7147dd;
-
+  position: relative;
   font-size: 3rem;
   font-weight: 700;
   padding: 2rem 3rem 1.5rem;
@@ -76,19 +76,19 @@ body {
   font-size: 1.25rem;
 }
 
-.letter-container p .aside {
+.letter-container p strong {
+  font-weight: 400;
   background-color: #efcddc;
   box-shadow: 0 -2px 0 2px #efcddc;
   cursor: pointer;
   transition: all .15s ease-in-out;
 }
 
-.letter-container p .aside:hover:not(.active) {
+.letter-container p strong:hover:not(.active) {
   background-color: #efcddc;
-  /* box-shadow: 0 -2px 0 4px #efcddc; */
 }
 
-.letter-container p .aside.active {
+.letter-container p strong.active {
   background-color: #7147dd;
   box-shadow: 0 -2px 0 2px #7147dd;
   color: #fff;
@@ -149,4 +149,52 @@ body {
   .side-text h6 {
     font-size: 1.25rem;
   }
+}
+
+
+ul.plus,
+ul.plusminus,
+ul.minus {
+  padding-left: 1.5rem;
+}
+
+ul.plus li,
+ul.plusminus li,
+ul.minus li {
+  list-style-type: none;
+  position: relative;
+}
+
+ul.plus li::before,
+ul.plusminus li::before,
+ul.minus li::before {
+  content: '+';
+  position: absolute;
+  left: -1.25rem;
+  top: -0.1rem;
+  font-weight: 500;
+  font-size: 1.15rem;
+}
+
+ul.plusminus li::before {
+  content: '±';
+}
+
+ul.minus li::before {
+  content: '-';
+}
+
+.signatures {
+  margin: 2rem 0;
+  font-family: 'Source Serif Pro', serif;
+  font-size: 1rem;
+}
+
+.smaller-title {
+  transform: none;
+  font-size: 2rem;
+}
+
+.dropdown-col {
+  margin: 2rem 0;
 }

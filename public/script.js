@@ -26,7 +26,7 @@ $(function onReady() {
 
   function closePopup() {
     $sideText.empty();
-    $letter.find('.aside').removeClass('active');
+    $letter.find('strong').removeClass('active');
 
     $('body').css('overflow', '');
     $sideTextContainer.css('overflow', '');
@@ -46,17 +46,17 @@ $(function onReady() {
     var popup = null;
 
     if ($this) {
-      text = $this.text().trim();
-      popup = popups[text];
+      text = $this.text().replace(/\s\s+/g, ' ').trim();
+      popup = popups.filter(p => p.text === text)[0];
     } else if (!$this && link) {
       for (prop in popups) {
         if (popups.hasOwnProperty(prop)) {
           if (popups[prop].link === link) {
             popup = popups[prop];
-            text = prop;
-            $letter.find('.aside').filter(function(index) {
+            text = popup.text;
+            $letter.find('strong').filter(function(index) {
               var $el = $(this);
-              if ($el.text().trim() === text) {
+              if ($el.text().replace(/\s\s+/g, ' ').trim() === text) {
                 $this = $el;
               }
             });
@@ -90,7 +90,7 @@ $(function onReady() {
     changeLink(popup.link || '');
   }
 
-  $letter.on('click', '.aside', function onClick(event) {
+  $letter.on('click', 'strong', function onClick(event) {
     var $this = $(this);
     var wasActive = $this.hasClass('active');
 
