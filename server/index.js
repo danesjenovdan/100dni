@@ -17,28 +17,52 @@ values.forEach((value) => {
     try {
       const $ = cheerio.load(indexHtml);
       const og = value.og || {};
+
       $([
-        'title',
         'meta[property="og:url"]',
-        'meta[property="og:title"]',
-        'meta[name="twitter:title"]',
-        'meta[property="og:image"]',
-        'meta[name="twitter:image"]',
-        'meta[property="og:description"]',
-        'meta[name="twitter:description"]',
       ].join(',')).remove();
 
-      $('title').text('Ustavimo botre sovraštva');
       $('head').append(`
-        <title>${og.title}</title>
         <meta property="og:url" content="https://danesjenovdan.si${baseUrl}${value.link}">
-        <meta property="og:title" content="${og.title}">
-        <meta name="twitter:title" content="${og.title}">
-        <meta property="og:image" content="https://danesjenovdan.si${baseUrl}${og.image}">
-        <meta name="twitter:image" content="https://danesjenovdan.si${baseUrl}${og.image}">
-        <meta property="og:description" content="${og.desc}">
-        <meta name="twitter:description" content="${og.desc}">
       `);
+
+      if (og.title) {
+        $([
+          'title',
+          'meta[property="og:title"]',
+          'meta[name="twitter:title"]',
+        ].join(',')).remove();
+
+        $('head').append(`
+          <title>${og.title}</title>
+          <meta property="og:title" content="${og.title}">
+          <meta name="twitter:title" content="${og.title}">
+        `);
+      }
+
+      if (og.image) {
+        $([
+          'meta[property="og:image"]',
+          'meta[name="twitter:image"]',
+        ].join(',')).remove();
+
+        $('head').append(`
+          <meta property="og:image" content="https://danesjenovdan.si${baseUrl}${og.image}">
+          <meta name="twitter:image" content="https://danesjenovdan.si${baseUrl}${og.image}">
+        `);
+      }
+
+      if (og.desc) {
+        $([
+          'meta[property="og:description"]',
+          'meta[name="twitter:description"]',
+        ].join(',')).remove();
+
+        $('head').append(`
+          <meta property="og:description" content="${og.desc}">
+          <meta name="twitter:description" content="${og.desc}">
+        `);
+      }
 
       res.send($.html());
     } catch (err) {
