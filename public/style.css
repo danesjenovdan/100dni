@@ -149,6 +149,10 @@ body {
   .side-text h6 {
     font-size: 1.25rem;
   }
+
+  .side-text h6 {
+    margin-right: 3rem;
+  }
 }
 
 
